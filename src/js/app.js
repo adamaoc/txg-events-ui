@@ -95,7 +95,7 @@ class App extends Component {
               })
           }
           </div>
-          <div class="txg-events-modal">
+          <div className="txg-events-modal">
             {this.props.children}
           </div>
         </div>

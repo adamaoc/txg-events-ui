@@ -67,7 +67,7 @@
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px -1px fade(#08c, 50%); }
 
 .Select-placeholder,
-.Select--single > .Select-control .Select-value {
+:not(.Select--multi) > .Select-control .Select-value {
   bottom: 0;
   color: #aaa;
   left: 0;
@@ -82,16 +82,16 @@
   text-overflow: ellipsis;
   white-space: nowrap; }
 
-.has-value.Select--single:not(.is-focused) > .Select-control > .Select-value .Select-value-label,
-.has-value.is-pseudo-focused.Select--single > .Select-control > .Select-value .Select-value-label {
+.has-value:not(.Select--multi):not(.is-focused) > .Select-control > .Select-value .Select-value-label,
+.has-value.is-pseudo-focused:not(.Select--multi) > .Select-control > .Select-value .Select-value-label {
   color: #333; }
 
-.has-value.Select--single:not(.is-focused) > .Select-control > .Select-value a.Select-value-label,
-.has-value.is-pseudo-focused.Select--single > .Select-control > .Select-value a.Select-value-label {
+.has-value:not(.Select--multi):not(.is-focused) > .Select-control > .Select-value a.Select-value-label,
+.has-value.is-pseudo-focused:not(.Select--multi) > .Select-control > .Select-value a.Select-value-label {
   cursor: pointer;
   text-decoration: none; }
-  .has-value.Select--single:not(.is-focused) > .Select-control > .Select-value a.Select-value-label:hover,
-  .has-value.is-pseudo-focused.Select--single > .Select-control > .Select-value a.Select-value-label:hover {
+  .has-value:not(.Select--multi):not(.is-focused) > .Select-control > .Select-value a.Select-value-label:hover,
+  .has-value.is-pseudo-focused:not(.Select--multi) > .Select-control > .Select-value a.Select-value-label:hover {
     color: #08c;
     text-decoration: underline; }
 
@@ -108,12 +108,10 @@
     display: inline-block;
     font-family: inherit;
     font-size: inherit;
+    height: 34px;
     margin: 0;
     outline: none;
-    line-height: 14px;
-    /* For IE 8 compatibility */
-    padding: 8px 0 12px;
-    /* For IE 8 compatibility */
+    padding: 0;
     -webkit-appearance: none; }
     .is-focused .Select-input > input {
       cursor: text; }
@@ -229,9 +227,6 @@
   .Select-option:last-child {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px; }
-  .Select-option.is-selected {
-    background-color: #f5faff;
-    color: #333; }
   .Select-option.is-focused {
     background-color: #f2f9fc;
     color: #333; }
@@ -418,6 +413,7 @@
     top: 0;
     right: 1em; }
     .event-modal__closer button {
+      cursor: pointer;
       background: transparent;
       border: none;
       width: 30px;

@@ -22,9 +22,11 @@ class EventItem extends Component {
   componentWillUnmount() {
     document.body.style.overflow = 'auto';
   }
-  _closeModal() {
-    debugger;
-    this.context.router.replace('/event-calendar/' + window.location.search);
+  _closeModal(e) {
+    if (e.currentTarget === e.target || e.target.classList[0] ===  'event-modal__closer-svg') {
+      this.context.router.replace('/event-calendar/' + window.location.search);
+    }
+    return true;
   }
   render() {
     const { evt } = this.state;
