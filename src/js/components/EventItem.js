@@ -43,7 +43,7 @@ class EventItem extends Component {
             <p>Time: {selectedEvt.time}</p>
             <p>Address: {selectedEvt.address}</p>
             <p>{selectedEvt.details}</p>
-            <p><a href={selectedEvt.weblink}>Find out more</a></p>
+            <p><a href={selectedEvt.weblink} target="_blank">Find out more</a></p>
             {/* <div>{JSON.stringify(selectedEvt)}</div> */}
           </div>
         </EventModal>
