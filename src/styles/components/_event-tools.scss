@@ -4,10 +4,45 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .event-tool__selector {
+    display: flex;
+    align-items: center;
+    svg {
+      fill: #555;
+    }
+    button {
+      border: none;
+      background: transparent;
+      &:focus {
+        outline: none;
+      }
+      &.active {
+        cursor: default;
+        svg {
+          fill: #999;
+        }
+        &:hover {
+          svg {
+            fill: #999;
+          }
+        }
+      }
+      &:hover {
+        svg {
+          fill: #852729;
+        }
+      }
+    }
+    span {
+      padding: 0 0.25em;
+      color: #555;
+    }
+  }
   .event-tool__filter {
     display: flex;
     margin-left: auto;
-    flex-basis: 13em;
+    flex-basis: 19em;
+    align-items: center;
     label {
       flex: 1;
       text-align: right;

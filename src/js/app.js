@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Select from 'react-select';
 import EventList from './components/EventList';
-
+import Calendar from './components/Calendar';
+import FilterTools from './components/filters/FilterTools';
+import SelectedFilters from './components/filters/SelectedFilters';
 
 const cityFilter = [
   { label: 'DFW', value: 'dfw' },
@@ -19,10 +20,12 @@ class App extends Component {
     this.state = {
       events: null,
       loading: true,
-      curFilter: null
+      curFilter: null,
+      calView: false
     };
     this.handleFilterSwitch = this._handleFilterSwitch.bind(this);
     this.removeFilter = this._removeFilter.bind(this);
+    this.handleViewSwitch = this._handleViewSwitch.bind(this);
   }
   componentDidMount() {
     this.serviceRequest =
@@ -60,41 +63,33 @@ class App extends Component {
           });
         });
   }
+  _handleViewSwitch(view) {
+    if (view === 'calendar') {
+      this.setState({ calView: true });
+    } else {
+      this.setState({ calView: false });
+    }
+  }
   render() {
-    const { loading, events, curFilter } = this.state;
+    const { loading, events, curFilter, calView } = this.state;
     if (!loading) {
       return (
         <div className="txg-events-app">
-          <div className="txg-events__tools">
-            <label>Filter By:</label>
-            <div className="event-tool__filter">
-              <Select
-                name="city-filter"
-                placeholder="Select a City"
-                options={cityFilter}
-                onChange={this.handleFilterSwitch} />
-            </div>
-          </div>
-          <div className="event-tools__selected-filter">
-            {curFilter
-              ? <div>
-                  <label>Selected Filter: </label>
-                  <span className="txg-events__tools-filter">
-                    {curFilter.value}
-                    <span className="cur-filter__remover" onClick={this.removeFilter}> (x)</span>
-                  </span>
-                </div>
-              : null
-            }
-          </div>
-          <div className="txg-event-list">
+          <FilterTools
+            cityFilter={cityFilter}
+            handleFilterSwitch={this.handleFilterSwitch}
+            handleViewSwitch={this.handleViewSwitch}
+            calView={calView}
+          />
+          <SelectedFilters
+            curFilter={curFilter}
+            removeFilter={this.removeFilter}
+          />
+
           {events.length === 0
             ? <div className="event-list--error">No events found.</div>
-            : events.map((evt, i) => {
-                return <EventList key={i} evt={evt} />;
-              })
+            : <EventList events={events} calView={calView} />
           }
-          </div>
           <div className="txg-events-modal">
             {this.props.children}
           </div>

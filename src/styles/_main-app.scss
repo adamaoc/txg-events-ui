@@ -1,7 +1,7 @@
 .txg-events-app {
   padding: 1.5em 0;
-  // max-width: 1080px;
-  // margin: 0 auto;
+  max-width: 1020px;
+  margin: 0 auto;
 }
 
 
@@ -14,4 +14,12 @@
 
 .post-hero__bg-cover {
   background: rgba(133, 39, 41, 0.7);
+}
+
+.txg-events-app {
+  label {
+    font-size: 0.75em;
+    color: #888;
+    text-transform: uppercase;
+  }
 }

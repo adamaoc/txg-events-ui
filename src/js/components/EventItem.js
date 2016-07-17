@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import EventModal from './EventModal';
 
 class EventItem extends Component {
@@ -28,20 +29,37 @@ class EventItem extends Component {
     }
     return true;
   }
+  renderDate(startDate, endDate) {
+    const start = moment(startDate);
+    const end = moment(endDate);
+    if (endDate === "0000-00-00" || startDate === endDate) {
+      return (
+        <span>
+        <p><label>Date:</label> {start.format("MMM Do YYYY")}</p>
+        </span>
+      );
+    }
+    return (
+      <span>
+        <p><label>Start Date:</label> {start.format("MMM Do YYYY")}</p>
+        <p><label>End Date:</label> {end.format("MMM Do YYYY")}</p>
+      </span>
+    )
+  }
   render() {
     const { evt } = this.state;
     if (evt) {
       const selectedEvt = evt[0];
       const imgStyle = 'url('+selectedEvt.coverPhoto+')';
+      const time = moment(selectedEvt.startDate + ' ' + selectedEvt.time);
       return (
         <EventModal title={selectedEvt.title} closeModal={this.closeModal}>
           <div>
             <div className="event-modal__hero" style={{backgroundImage: imgStyle}}></div>
-            <p>City: {selectedEvt.city}</p>
-            <p>Start Date: {selectedEvt.startDate}</p>
-            <p>End Date: {selectedEvt.endDate}</p>
-            <p>Time: {selectedEvt.time}</p>
-            <p>Address: {selectedEvt.address}</p>
+            <p><label>City:</label> {selectedEvt.city}</p>
+            {this.renderDate(selectedEvt.startDate, selectedEvt.endDate)}
+            <p><label>Time:</label> {time.format("h:mm a")}</p>
+            <p><label>Address:</label> {selectedEvt.address}</p>
             <p>{selectedEvt.details}</p>
             <p><a href={selectedEvt.weblink} target="_blank">Find out more</a></p>
             {/* <div>{JSON.stringify(selectedEvt)}</div> */}

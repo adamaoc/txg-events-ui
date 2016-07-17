@@ -1,4 +1,4 @@
-.txg-event-list {
+.txg-event-list__listed {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -54,5 +54,19 @@
         color: #333;
       }
     }
+  }
+}
+
+
+.txg-events-app {
+  .rbc-calendar {
+    min-height: 600px;
+    width: 100%;
+    padding: 1em 0;
+  }
+  .rbc-toolbar-label {
+    text-align: right;
+    font-weight: bold;
+    font-family: sans-serif;
   }
 }
