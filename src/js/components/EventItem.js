@@ -60,7 +60,7 @@ class EventItem extends Component {
             {this.renderDate(selectedEvt.startDate, selectedEvt.endDate)}
             <p><label>Time:</label> {time.format("h:mm a")}</p>
             <p><label>Address:</label> {selectedEvt.address}</p>
-            <p>{selectedEvt.details}</p>
+            <p dangerouslySetInnerHTML={{__html: selectedEvt.details}} />
             <p><a href={selectedEvt.weblink} target="_blank">Find out more</a></p>
             {/* <div>{JSON.stringify(selectedEvt)}</div> */}
           </div>
