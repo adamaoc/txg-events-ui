@@ -1,5 +1,5 @@
 .txg-events__tools {
-  background: #eee;
+  background: #1c3750;
   padding: 0.5em;
   display: flex;
   align-items: center;
@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     svg {
-      fill: #555;
+      fill: #fff;
     }
     button {
       border: none;
@@ -19,11 +19,11 @@
       &.active {
         cursor: default;
         svg {
-          fill: #999;
+          fill: #fff;
         }
         &:hover {
           svg {
-            fill: #999;
+            fill: #852729;
           }
         }
       }
@@ -35,7 +35,7 @@
     }
     span {
       padding: 0 0.25em;
-      color: #555;
+      color: #fff;
     }
   }
   .event-tool__filter {
@@ -47,6 +47,7 @@
       flex: 1;
       text-align: right;
       padding-right: 1em;
+      color: #fff;
       span {
         display: block;
         font-size: 0.75em;

@@ -56,12 +56,14 @@ class EventItem extends Component {
         <EventModal title={selectedEvt.title} closeModal={this.closeModal}>
           <div>
             <div className="event-modal__hero" style={{backgroundImage: imgStyle}}></div>
+            <div className="event-modal__content">
             <p><label>City:</label> {selectedEvt.city}</p>
-            {this.renderDate(selectedEvt.startDate, selectedEvt.endDate)}
-            <p><label>Time:</label> {time.format("h:mm a")}</p>
-            <p><label>Address:</label> {selectedEvt.address}</p>
-            <p dangerouslySetInnerHTML={{__html: selectedEvt.details}} />
-            <p><a href={selectedEvt.weblink} target="_blank">Find out more</a></p>
+              {this.renderDate(selectedEvt.startDate, selectedEvt.endDate)}
+              <p><label>Time:</label> {time.format("h:mm a")}</p>
+              <p><label>Address:</label> {selectedEvt.address}</p>
+              <p dangerouslySetInnerHTML={{__html: selectedEvt.details}} />
+              <p><a href={selectedEvt.weblink} target="_blank">Find out more</a></p>
+            </div>
             {/* <div>{JSON.stringify(selectedEvt)}</div> */}
           </div>
         </EventModal>

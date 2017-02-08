@@ -19,6 +19,7 @@
   }
   &__header {
     position: relative;
+    padding-left: 1em;
     h3 {
       max-width: 100%;
       margin: 1rem;
@@ -51,5 +52,8 @@
     width: 100%;
     background-size: cover;
     background-position: center center;
+  }
+  &__content {
+    padding: 1em;
   }
 }

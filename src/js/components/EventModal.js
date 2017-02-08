@@ -6,6 +6,12 @@ class EventModal extends Component {
     this.handleBGClick = this._handleBGClick.bind(this);
     this.handleBtnClick = this._handleBtnClick.bind(this);
   }
+  componentDidMount() {
+    document.documentElement.style.overflow = 'hidden';
+  }
+  componentWillUnmount() {
+    document.documentElement.style.overflow = null;
+  }
   _handleBGClick(e) {
     const that = this;
     debugger;

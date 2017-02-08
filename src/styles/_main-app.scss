@@ -1,7 +1,7 @@
 .txg-events-app {
-  padding: 1.5em 0;
-  max-width: 1020px;
-  margin: 0 auto;
+  // padding: 1.5em 0;
+  // max-width: 1020px;
+  // margin: 0 auto;
 }
 
 
@@ -22,4 +22,19 @@
     color: #888;
     text-transform: uppercase;
   }
+}
+
+
+// specific to theme...
+.mvp-post-info-wrap {
+  display: none;
+}
+#mvp-post-area {
+  padding-top: 0;
+}
+#mvp-post-head {
+  display: none;
+}
+#mvp-head-top {
+  display: none;
 }

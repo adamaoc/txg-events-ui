@@ -4,7 +4,7 @@
  * ============
  * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/
  * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs
- * MIT License: https://github.com/keystonejs/react-select
+ * MIT License: https://github.com/JedWatson/react-select
 */
 @keyframes Select-animation-spin {
   to {
@@ -47,6 +47,8 @@
   width: 100%; }
   .Select-control:hover {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06); }
+  .Select-control .Select-input:focus {
+    outline: none; }
 
 .is-searchable.is-open > .Select-control {
   cursor: text; }
@@ -56,7 +58,8 @@
   border-bottom-left-radius: 0;
   background: #fff;
   border-color: #b3b3b3 #ccc #d9d9d9; }
-  .is-open > .Select-control > .Select-arrow {
+  .is-open > .Select-control .Select-arrow {
+    top: -2px;
     border-color: transparent transparent #999;
     border-width: 0 5px 5px; }
 
@@ -68,7 +71,7 @@
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 5px -1px fade(#08c, 50%); }
 
 .Select-placeholder,
-:not(.Select--multi) > .Select-control .Select-value {
+.Select--single > .Select-control .Select-value {
   bottom: 0;
   color: #aaa;
   left: 0;
@@ -83,17 +86,19 @@
   text-overflow: ellipsis;
   white-space: nowrap; }
 
-.has-value:not(.Select--multi):not(.is-focused) > .Select-control > .Select-value .Select-value-label,
-.has-value.is-pseudo-focused:not(.Select--multi) > .Select-control > .Select-value .Select-value-label {
+.has-value.Select--single > .Select-control .Select-value .Select-value-label,
+.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value .Select-value-label {
   color: #333; }
 
-.has-value:not(.Select--multi):not(.is-focused) > .Select-control > .Select-value a.Select-value-label,
-.has-value.is-pseudo-focused:not(.Select--multi) > .Select-control > .Select-value a.Select-value-label {
+.has-value.Select--single > .Select-control .Select-value a.Select-value-label,
+.has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label {
   cursor: pointer;
   text-decoration: none; }
-  .has-value:not(.Select--multi):not(.is-focused) > .Select-control > .Select-value a.Select-value-label:hover,
-  .has-value.is-pseudo-focused:not(.Select--multi) > .Select-control > .Select-value a.Select-value-label:hover {
+  .has-value.Select--single > .Select-control .Select-value a.Select-value-label:hover, .has-value.Select--single > .Select-control .Select-value a.Select-value-label:focus,
+  .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:hover,
+  .has-value.is-pseudo-focused.Select--single > .Select-control .Select-value a.Select-value-label:focus {
     color: #08c;
+    outline: none;
     text-decoration: underline; }
 
 .Select-input {
@@ -109,10 +114,12 @@
     display: inline-block;
     font-family: inherit;
     font-size: inherit;
-    height: 34px;
     margin: 0;
     outline: none;
-    padding: 0;
+    line-height: 14px;
+    /* For IE 8 compatibility */
+    padding: 8px 0 12px;
+    /* For IE 8 compatibility */
     -webkit-appearance: none; }
     .is-focused .Select-input > input {
       cursor: text; }
@@ -165,6 +172,17 @@
 .Select--multi .Select-clear-zone {
   width: 17px; }
 
+.Select--multi .Select-multi-value-wrapper {
+  display: inline-block; }
+
+.Select .Select-aria-only {
+  display: inline-block;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden; }
+
 .Select-arrow-zone {
   cursor: pointer;
   display: table-cell;
@@ -180,7 +198,8 @@
   border-width: 5px 5px 2.5px;
   display: inline-block;
   height: 0;
-  width: 0; }
+  width: 0;
+  position: relative; }
 
 .is-open .Select-arrow,
 .Select-arrow-zone:hover > .Select-arrow {
@@ -228,6 +247,9 @@
   .Select-option:last-child {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px; }
+  .Select-option.is-selected {
+    background-color: #f5faff;
+    color: #333; }
   .Select-option.is-focused {
     background-color: #f2f9fc;
     color: #333; }
@@ -717,7 +739,9 @@ button.rbc-input::-moz-focus-inner {
   display: -webkit-box;
   display: flex;
   -ms-flex-flow: column nowrap;
-  flex-flow: column nowrap; }
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-flow: column nowrap; }
 
 .rbc-time-gutter,
 .rbc-header-gutter {
@@ -738,7 +762,9 @@ button.rbc-input::-moz-focus-inner {
   display: flex;
   max-height: 100%;
   -ms-flex-flow: column wrap;
-  flex-flow: column wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-flow: column wrap;
   -ms-flex-align: start;
   -webkit-box-align: start;
           align-items: flex-start;
@@ -879,11 +905,6 @@ button.rbc-input::-moz-focus-inner {
 .rbc-time-content > .rbc-day-slot {
   width: 100%; }
 
-.txg-events-app {
-  padding: 1.5em 0;
-  max-width: 1020px;
-  margin: 0 auto; }
-
 .txg-events__loader {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -903,6 +924,18 @@ button.rbc-input::-moz-focus-inner {
   font-size: 0.75em;
   color: #888;
   text-transform: uppercase; }
+
+.mvp-post-info-wrap {
+  display: none; }
+
+#mvp-post-area {
+  padding-top: 0; }
+
+#mvp-post-head {
+  display: none; }
+
+#mvp-head-top {
+  display: none; }
 
 .txg-event-list__listed {
   display: -webkit-box;
@@ -988,7 +1021,8 @@ button.rbc-input::-moz-focus-inner {
     max-height: 95vh;
     overflow-x: auto; }
   .event-modal__header {
-    position: relative; }
+    position: relative;
+    padding-left: 1em; }
     .event-modal__header h3 {
       max-width: 100%;
       margin: 1rem;
@@ -1013,9 +1047,11 @@ button.rbc-input::-moz-focus-inner {
     width: 100%;
     background-size: cover;
     background-position: center center; }
+  .event-modal__content {
+    padding: 1em; }
 
 .txg-events__tools {
-  background: #eee;
+  background: #1c3750;
   padding: 0.5em;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1034,7 +1070,7 @@ button.rbc-input::-moz-focus-inner {
         -ms-flex-align: center;
             align-items: center; }
     .txg-events__tools .event-tool__selector svg {
-      fill: #555; }
+      fill: #fff; }
     .txg-events__tools .event-tool__selector button {
       border: none;
       background: transparent; }
@@ -1043,14 +1079,14 @@ button.rbc-input::-moz-focus-inner {
       .txg-events__tools .event-tool__selector button.active {
         cursor: default; }
         .txg-events__tools .event-tool__selector button.active svg {
-          fill: #999; }
+          fill: #fff; }
         .txg-events__tools .event-tool__selector button.active:hover svg {
-          fill: #999; }
+          fill: #852729; }
       .txg-events__tools .event-tool__selector button:hover svg {
         fill: #852729; }
     .txg-events__tools .event-tool__selector span {
       padding: 0 0.25em;
-      color: #555; }
+      color: #fff; }
   .txg-events__tools .event-tool__filter {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1066,7 +1102,8 @@ button.rbc-input::-moz-focus-inner {
           -ms-flex: 1;
               flex: 1;
       text-align: right;
-      padding-right: 1em; }
+      padding-right: 1em;
+      color: #fff; }
       .txg-events__tools .event-tool__filter label span {
         display: block;
         font-size: 0.75em; }
